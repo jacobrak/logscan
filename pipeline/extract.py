@@ -11,7 +11,7 @@ def drop_data(df):
     * Time - Only one time
     * Referrer - Only one url
     """
-    df.drop(["time", "referrer"], axis=1)
+    return df.drop(["time", "referrer"], axis=1)
 
 def parse_logs(path):
     data = []
