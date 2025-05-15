@@ -8,9 +8,10 @@ def drop_data(df):
     """
     Drop unnessacry data
     
-    It's all the same
+    * Time - Only one time
+    * Referrer - Only one url
     """
-    df.drop(["time"], axis=1)
+    df.drop(["time", "referrer"], axis=1)
 
 def parse_logs(path):
     data = []
