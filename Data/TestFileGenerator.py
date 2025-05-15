@@ -11,6 +11,8 @@ random.seed(42)
 faker.Faker.seed(42)
 fak = faker.Faker()
 
+os.environ['TZ'] = 'Asia/Kolkata'
+
 def str_time_prop(start, end, format, prop):
     stime = time.mktime(time.strptime(start, format))
     etime = time.mktime(time.strptime(end, format))
@@ -35,7 +37,7 @@ dictionary = {'request': ['GET', 'POST', 'PUT', 'DELETE'], 'endpoint': ['/usr', 
             'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_9 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Mobile/15E148 Safari/604.1'],
             'referrer' : ['-',fak.uri()]}
 
-f = open("logfiles.log","w")
+f = open("data/logfiles.log","w")
 for _ in range(1,10001):
     f.write('%s - - [%s] "%s %s HTTP/1.0" %s %s "%s" "%s" %s\n' % 
         (fak.ipv4(),
