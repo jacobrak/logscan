@@ -4,9 +4,9 @@ import pandas as pd
 LOG_PATH = 'data/logfiles.log'
 LOG_PATTERN = r'(?P<ip>\S+) - - \[(?P<time>[^\]]+)\] "(?P<method>\S+) (?P<endpoint>\S+) HTTP/\d\.\d" (?P<status>\d+) (?P<bytes>\d+) "(?P<referrer>[^"]+)" "(?P<ua>[^"]+)" (?P<response_time>\d+)'
 
-def droptime(df):
+def drop_data(df):
     """
-    Drop time
+    Drop unnessacry data
     
     It's all the same
     """
@@ -20,7 +20,7 @@ def parse_logs(path):
             if match:
                 data.append(match.groupdict())
     
-    return droptime(pd.DataFrame(data))
+    return drop_data(pd.DataFrame(data))
 
 if __name__ == "__main__":
     df = parse_logs(LOG_PATH)
