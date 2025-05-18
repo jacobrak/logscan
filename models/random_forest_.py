@@ -3,7 +3,7 @@ import json
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from data.dataset_creation import prepare_data
+from data.test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data()
 
