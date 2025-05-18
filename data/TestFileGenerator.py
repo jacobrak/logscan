@@ -45,7 +45,7 @@ for _ in range(1,10001):
          choice(dictionary['request']),
          choice(dictionary['endpoint']),
          choice(dictionary['statuscode']),    
-         str(int(random.gauss(5000,50))),
+         str(int(random.gauss(5000,500))),
          choice(dictionary['referrer']),
          choice(dictionary['ua']),
          random.randint(1,5000)))
