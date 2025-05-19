@@ -1,13 +1,8 @@
 import optuna
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import mean_squared_error
-import numpy as np
 import json
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from data.test_spliting import prepare_data
+from test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data() 
 assert len(X_train) != 0, "X_train size is 0, Error during optimization"
