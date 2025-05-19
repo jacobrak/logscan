@@ -1,15 +1,11 @@
 from sklearn.ensemble import RandomForestRegressor
 import json
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from data.test_spliting import prepare_data
+from test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data()
 
 with open("models/best_params.json", "r") as infile:
     best_parms = json.load(infile)
-
 
 def RandomForestRegressor_model(X_train, y_train, params):
     """
