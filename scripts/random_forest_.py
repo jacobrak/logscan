@@ -22,7 +22,7 @@ def RandomForestRegressor_model(X_train=X_train, y_train=y_train, params=best_pa
     assert len(best_parms) != 0, "best_parms is empty"
     assert len(X_train) != 0, "X_train size is 0, Error during optimization"
     assert len(y_train) != 0, "y_train size is 0, Error during optimization"
-    model_best = RandomForestRegressor(**params)
+    model_best = RandomForestRegressor(**params, random_state=42)
     model_best.fit(X_train, y_train)
     
     return model_best
