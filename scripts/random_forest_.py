@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestRegressor
 import json
-from test_spliting import prepare_data
+from joblib import dump
+from train_test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data()
 
@@ -25,6 +26,10 @@ def RandomForestRegressor_model(X_train, y_train, params):
     model_best.fit(X_train, y_train)
     
     return model_best
+
+def model_to_file():
+    model = RandomForestRegressor_model(X_train, y_train, best_parms)
+    dump(model, 'models/random_forest_model.joblib')
 
 if __name__ == "__main__":
     from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, root_mean_squared_error
