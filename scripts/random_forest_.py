@@ -8,7 +8,7 @@ X_train, X_test, y_train, y_test = prepare_data()
 with open("models/best_params.json", "r") as infile:
     best_parms = json.load(infile)
 
-def RandomForestRegressor_model(X_train, y_train, params):
+def RandomForestRegressor_model(X_train=X_train, y_train=y_train, params=best_parms):
     """
     Train a RandomForestRegressor with optimized hyperparameters.
 
