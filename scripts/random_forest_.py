@@ -32,6 +32,7 @@ def model_to_file():
     dump(model, 'models/random_forest_model.joblib')
 
 if __name__ == "__main__":
+    model_to_file()
     from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, root_mean_squared_error
     model = RandomForestRegressor_model(X_train, y_train, best_parms)
 
