@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestRegressor
 import json
 from joblib import dump
-from train_test_spliting import prepare_data
+from scripts.train_test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data()
 
