@@ -1,31 +1,29 @@
-# Use official Python image
 FROM python:3.11-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV AIRFLOW_HOME=/app/airflow
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Set working directory
-WORKDIR /app
+WORKDIR $AIRFLOW_HOME
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    default-libmysqlclient-dev \
     libpq-dev \
-    git \
     curl \
     && apt-get clean
 
-# Copy requirement files
+# Install Airflow with constraints
 COPY requirements.txt .
 
-# Install Python dependencies with constraint for airflow
+# Get constraints URL for Airflow version
+ARG AIRFLOW_VERSION=2.8.1
+ARG CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.11.txt"
+
 RUN pip install --upgrade pip && \
+    pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}" && \
     pip install -r requirements.txt
 
-# Copy the rest of the project
 COPY . .
 
-# Default command (can be overwritten)
-CMD ["python"]
+CMD ["airflow", "standalone"]
