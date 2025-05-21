@@ -7,17 +7,6 @@ from sklearn.metrics import mean_squared_error
 import os
 import streamlit as st
 
-st.write("Current working directory:", os.getcwd())
-st.write("Files in current directory:", os.listdir('.'))
-
-# Check inside 'app' folder (adjust if needed)
-if os.path.exists('app'):
-    st.write("Files in 'app':", os.listdir('app'))
-    if os.path.exists('app/model'):
-        st.write("Files in 'app/model':", os.listdir('app/model'))
-else:
-    st.write("'app' folder not found")
-
 # --- Load saved artifacts ---
 @st.cache_data
 def load_model():
@@ -55,7 +44,7 @@ def main():
     y_pred = model.predict(X)
     mse = mean_squared_error(y_true, y_pred)
     rmse = mse ** 0.5
-    st.write(f"Root Mean Squared Error on validation data: **{rmse:.2f}**")
+    st.write(f"RMSE: **{rmse:.2f}**")
 
 
     st.header("Feature Importance")
