@@ -27,4 +27,4 @@ RUN pip install --upgrade pip && \
 
 COPY . .
 
-CMD ["airflow", "standalone", "main.py"]
+CMD ["airflow", "standalone"]
