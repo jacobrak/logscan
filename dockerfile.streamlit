@@ -5,8 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY . . 
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "your_dashboard.py"]
+CMD ["streamlit", "run", "scripts/dashboard.py"]
