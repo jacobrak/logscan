@@ -2,7 +2,10 @@ import optuna
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 import json
-from train_test_spliting import prepare_data
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from scripts.train_test_spliting import prepare_data
 
 X_train, X_test, y_train, y_test = prepare_data() 
 assert len(X_train) != 0, "X_train size is 0, Error during optimization"
