@@ -8,9 +8,9 @@ default_args = {
     'retries': 1,
 }
 
-with DAG('run_my_scripts',
+with DAG('main',
          default_args=default_args,
-         schedule_interval=None,  # run manually or trigger on demand
+         schedule_interval=None,
          catchup=False) as dag:
 
     t1 = BashOperator(
@@ -33,5 +33,4 @@ with DAG('run_my_scripts',
         bash_command='python /app/scripts/random_forest_.py'
     )
 
-    # Define the order: t1 -> t2 -> t3 -> t4
     t1 >> t2 >> t3 >> t4

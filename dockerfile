@@ -26,12 +26,12 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Copy your DAG and script files
-COPY main.py $AIRFLOW_HOME/dags/main.py
+COPY dags/ $AIRFLOW_HOME/dags/
 COPY scripts/ $AIRFLOW_HOME/scripts/
 
 # Set Airflow dags folder explicitly (optional if you mount it)
 ENV AIRFLOW__CORE__DAGS_FOLDER=$AIRFLOW_HOME/dags
-
+ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 # Copy any remaining files (optional)
 COPY . .
 
