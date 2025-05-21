@@ -1,6 +1,11 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime
+import sys
+sys.path.insert(0, '/app/airflow')
+from scripts.extract import save_clean_dataframe
+from scripts.optuna_optimizer import study_
+from scripts.random_forest_ import model_to_file
 
 default_args = {
     'owner': 'you',
@@ -13,24 +18,19 @@ with DAG('main',
          schedule_interval=None,
          catchup=False) as dag:
 
-    t1 = BashOperator(
-        task_id='TestFileGeneration',
-        bash_command='python /app/scripts/TestFileGeneration.py'
-    )
-
-    t2 = BashOperator(
+    t1 = PythonOperator(
         task_id='extract',
-        bash_command='python /app/scripts/extract.py'
+        python_callable=save_clean_dataframe,
     )
 
-    t3 = BashOperator(
+    t2 = PythonOperator(
         task_id='optuna',
-        bash_command='python /app/scripts/optuna_optimizer.py'
+        python_callable=study_,
     )
 
-    t4 = BashOperator(
+    t3 = PythonOperator(
         task_id='randomforest',
-        bash_command='python /app/scripts/random_forest_.py'
+        python_callable=model_to_file,
     )
 
-    t1 >> t2 >> t3 >> t4
+    t1 >> t2 >> t3
