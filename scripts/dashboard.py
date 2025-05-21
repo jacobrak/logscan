@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, root_mean_squared_error, r2_score
 import os
 import streamlit as st
 
@@ -43,9 +43,14 @@ def main():
 
     y_pred = model.predict(X)
     mse = mean_squared_error(y_true, y_pred)
-    rmse = mse ** 0.5
-    st.write(f"RMSE: **{rmse:.2f}**")
+    mae = mean_absolute_error(y_true, y_pred)
+    RMSE = root_mean_squared_error(y_true, y_pred)
+    R = r2_score(y_true, y_pred)
 
+    st.write(f"RMSE: **{RMSE:.2f}**")
+    st.write(f"MSE: **{mse:.2f}**")
+    st.write(f"MAE: **{mae:.2f}**")
+    st.write(f"R²: **{R:.2f}**")
 
     st.header("Feature Importance")
     plot_feature_importance(model, X.columns)
