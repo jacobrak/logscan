@@ -7,6 +7,13 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from scripts.train_test_spliting import prepare_data
 
+def get_data_path():
+    if os.path.exists("/app/models/"):
+        return "/app/models/best_params.json"
+    else:
+        return "models/best_params.json"
+    
+
 X_train, X_test, y_train, y_test = prepare_data() 
 assert len(X_train) != 0, "X_train size is 0, Error during optimization"
 assert len(y_train) != 0, "y_train size is 0, Error during optimization"
@@ -30,7 +37,7 @@ def study_():
     study.optimize(objective, n_trials=50) 
     best_params = study.best_params
 
-    with open("best_params.json", "w") as w:
+    with open(get_data_path(), "w") as w:
         json.dump(best_params, w)
 
 if __name__ == "__main__":

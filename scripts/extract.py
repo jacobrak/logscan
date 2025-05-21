@@ -2,8 +2,21 @@ import re
 import pandas as pd
 import random
 import numpy as np
-from user_agents import parse  
-LOG_PATH = 'data/logfiles.log'
+from user_agents import parse
+import os
+def get_data_path():
+    if os.path.exists("/app/data/logfiles.log"):
+        return "/app/data/logfiles.log"
+    else:
+        return "data/logfiles.log"
+
+def get_data_path2():
+    if os.path.exists("/app/data/"):
+        return "/app/data/processed_data.csv"
+    else:
+        return "data/processed_data1.csv"
+    
+LOG_PATH = get_data_path()
 LOG_PATTERN = r'(?P<ip>\S+) - - \[(?P<time>[^\]]+)\] "(?P<method>\S+) (?P<endpoint>\S+) HTTP/\d\.\d" (?P<status>\d+) (?P<bytes>\d+) "(?P<referrer>[^"]+)" "(?P<ua>[^"]+)" (?P<response_time>\d+)'
 
 def drop_data(df):
@@ -98,7 +111,8 @@ def recreate(df: pd.DataFrame) -> pd.DataFrame:
 def save_clean_dataframe():
     df = parse_logs(LOG_PATH)
     new_df = recreate(df)
-    new_df.to_csv("data/processed_data1.csv", index=False)
+    file_path = get_data_path2()
+    new_df.to_csv(file_path, index=False)
 
 if __name__ == "__main__":
     df = parse_logs(LOG_PATH)
