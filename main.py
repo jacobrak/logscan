@@ -14,8 +14,8 @@ with DAG('run_my_scripts',
          catchup=False) as dag:
 
     t1 = BashOperator(
-        task_id='testfilegeneration',
-        bash_command='python /app/scripts/testfilegeneration.py'
+        task_id='TestFileGeneration',
+        bash_command='python /app/scripts/TestFileGeneration.py'
     )
 
     t2 = BashOperator(
@@ -25,12 +25,12 @@ with DAG('run_my_scripts',
 
     t3 = BashOperator(
         task_id='optuna',
-        bash_command='python /app/scripts/optuna.py'
+        bash_command='python /app/scripts/optuna_optimizer.py'
     )
 
     t4 = BashOperator(
         task_id='randomforest',
-        bash_command='python /app/scripts/randomforest.py'
+        bash_command='python /app/scripts/random_forest_.py'
     )
 
     # Define the order: t1 -> t2 -> t3 -> t4
