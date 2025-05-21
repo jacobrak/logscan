@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install Airflow with constraints
 COPY requirements.txt .
-
+COPY main.py $AIRFLOW_HOME/dags/
+COPY scripts/ $AIRFLOW_HOME/scripts/
 # Get constraints URL for Airflow version
 ARG AIRFLOW_VERSION=2.8.1
 ARG CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-3.11.txt"
@@ -26,4 +27,4 @@ RUN pip install --upgrade pip && \
 
 COPY . .
 
-CMD ["airflow", "standalone"]
+CMD ["airflow", "standalone", "main.py"]
